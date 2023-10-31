@@ -1,10 +1,9 @@
 import { CarCard, CustomFilter, Hero, SearchBar, ShowMore } from "@/components";
 import { fuels, yearsOfProduction } from "@/constants";
-import { FilterProps } from "@/types";
+import { SearchParamsProps } from "@/types";
 import { fetchCars } from "@/utils";
-import Image from "next/image";
 
-export default async function Home({ searchParams }) {
+export default async function Home({ searchParams }: SearchParamsProps) {
   const allCars = await fetchCars({
     manufacturer: searchParams.manufacturer || "",
     year: searchParams.year || 2022,
@@ -35,7 +34,7 @@ export default async function Home({ searchParams }) {
           <section>
             <div className="home__cars-wrapper">
               {allCars?.map((car) => (
-                <CarCard car={car} />
+                <CarCard car={car} key={Math.random()} />
               ))}
             </div>
             <ShowMore
